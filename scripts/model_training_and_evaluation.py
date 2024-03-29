@@ -7,6 +7,8 @@ from tsfresh.utilities.dataframe_functions import impute
 import joblib
 from numpy import ndarray
 import threadpoolctl
+from imblearn.over_sampling import RandomOverSampler
+from sklearn.model_selection import train_test_split
 
 # Add the path to the DataLoader script
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -74,25 +76,29 @@ def main():
     
     print(features.head(5))
 
-    learner_random_forest  = Learner(config=config["random_forest"])
-    learner_decision_tree  = Learner(config=config["decision_tree"])
-    learner_knn  = Learner(config=config["k_nearest_neighbors"])
-
-    features_df = features.drop(['label'],axis=1)
-    target = features.loc[:, 'label']
+    features_df = features.drop(['label'], axis=1)
+    target = features['label']
   
-   # Impute any missing values in the feature set
-    impute(features)
+    # Impute any missing values in the feature set
+    impute(features_df)
 
     # Select only relevant features
     relevant_features = select_features(features_df, target)
-    
-    X_train, X_test, y_train, y_test  = learner_random_forest.split_data_set(relevant_features, target)
 
-    train_and_evaluate(algorithm_=config["random_forest"]["name"],learner=learner_random_forest, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
-    train_and_evaluate(algorithm_=config["decision_tree"]["name"],learner=learner_decision_tree, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
-    train_and_evaluate(algorithm_=config["k_nearest_neighbors"]["name"],learner=learner_knn, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
+    # Apply Random Over Sampling to account for the imbalanced dataset
+    ros = RandomOverSampler(random_state=42)
+    X_resampled, y_resampled = ros.fit_resample(relevant_features, target)
+
+    # Now split the resampled data
+    X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.25, random_state=42)
+
+    learner_random_forest = Learner(config=config["random_forest"])
+    learner_decision_tree = Learner(config=config["decision_tree"])
+    learner_knn = Learner(config=config["k_nearest_neighbors"])
+
+    train_and_evaluate(algorithm_=config["random_forest"]["name"], learner=learner_random_forest, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
+    train_and_evaluate(algorithm_=config["decision_tree"]["name"], learner=learner_decision_tree, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
+    train_and_evaluate(algorithm_=config["k_nearest_neighbors"]["name"], learner=learner_knn, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
 
 if __name__ == "__main__":
     main()
-
