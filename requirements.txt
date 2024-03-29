@@ -1,0 +1,12 @@
+matplotlib==3.8.2
+matplotlib-inline==0.1.6
+numpy==1.26.3
+pandas==2.1.4
+scikit-learn==1.3.2
+scipy==1.11.4
+seaborn==0.13.1
+statsmodels
+pathlib
+tsfresh==0.20.2
+pytest==8.0.0
+bokeh==3.3.4
