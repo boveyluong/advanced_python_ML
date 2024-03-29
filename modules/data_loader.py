@@ -109,3 +109,14 @@ class DataLoader:
         data['data'] = data['data'].astype(str).str.replace(',', '.').astype(float)
 
         return data
+
+# # example usage
+# # Initialisiere den DataLoader
+# data_loader = DataLoader('config.json')
+# # Lade Daten für ein bestimmtes Experiment
+# experiment_name = 'experiment1'
+# data = data_loader.load_experiment_data(experiment_name)
+# print(data.head())
+# # Lade Daten für alle Experimente
+# data = data_loader.load_experiment_data()
+# print(data.head())
