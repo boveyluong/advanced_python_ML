@@ -69,7 +69,6 @@ Welcome to our Python project! We developed an AI-supported process monitoring s
 
 ### Configuration (config.json)
 
-<h2>The <code>config.json</code> file</h2>
 <p>The <code>config.json</code> file plays a crucial role in defining the paths to datasets and specifying algorithms used in the project. Here's a breakdown:</p>
 
 <h3>Experiments</h3>
@@ -95,11 +94,13 @@ Welcome to our Python project! We developed an AI-supported process monitoring s
 <p>To ensure the reliability of our modules, run the test scripts located in the <code>test/</code> directory:</p>
 <pre><code>pytest</code></pre>
 
-<h3>Contributing</h3>
+## Contributing</h3>
 <p>Contributions are welcome! For major changes, please open an issue first to discuss what you would like to change.</p>
 
-<h3>License</h3>
+## License
+
 <p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
 
-<h3>Acknowledgments</h3>
+## Acknowledgments
+
 <p>Thanks to all project members and contributors who have invested their efforts in the development of this project.</p>
