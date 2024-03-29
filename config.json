@@ -28,10 +28,13 @@
         {"path": ".data\\Experiment_4\\raw_data\\measurement_5.pkl", "type": "pkl"},
         {"path": ".data\\Experiment_4\\raw_data\\measurement_6.pkl", "type": "pkl"}
       ]
+    },      
+      "feature_extraction": {
+      "default_fc_parameters": "ComprehensiveFCParameters"
     },
     "algorithms": {
-      "random_forest": {"name": "random_forest", "n_estimators": 1000, "random_state": 42 }, 
-      "decision_tree": { "name": "decision_tree", "max_depth": 1 },
+      "random_forest": {"name": "random_forest", "n_estimators": 1000, "random_state": 41 }, 
+      "decision_tree": { "name": "decision_tree", "max_depth": 3 },
       "k_nearest_neighbors": { "name": "k_nearest_neighbors", "n_neighbors": 3 },
       "optimizer": {
         "name": "optimizer",
