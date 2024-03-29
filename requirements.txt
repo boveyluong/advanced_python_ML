@@ -10,3 +10,4 @@ pathlib
 tsfresh==0.20.2
 pytest==8.0.0
 bokeh==3.3.4
+imbalanced-learn==0.12.0
