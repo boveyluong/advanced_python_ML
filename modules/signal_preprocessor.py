@@ -87,10 +87,11 @@ class SignalPreprocessor:
     
         for window in windows:
             filtered = self.butter_lowpass_filter(window['data'].values)
-            normalized = self.scaler.fit_transform(filtered.reshape(-1, 1)).flatten()
+            #normalized = self.scaler.fit_transform(filtered.reshape(-1, 1)).flatten()
             preprocessed_window = pd.DataFrame({
                 'time': np.round(window['time'].reset_index(drop=True), 4),
-                'data_filtered_normalized': normalized
+                #'data_filtered_normalized': normalized
+                'data_filtered': filtered
             })
             preprocessed_windows.append(preprocessed_window)
         return preprocessed_windows
